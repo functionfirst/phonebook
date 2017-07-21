@@ -9,7 +9,7 @@ var contacts = {
 }
 
 function list(req, res) {
-  Contact.find(function(err, contacts) {
+  Contact.find({},  'name email mobile', function(err, contacts) {
     if(err) res.send(err);
 
     res.json(contacts);
@@ -17,7 +17,7 @@ function list(req, res) {
 }
 
 function view(req, res) {
-  Contact.findById(req.params.id, function(err, contact) {
+  Contact.findById(req.params.id, 'name email mobile', function(err, contact) {
     if(err) res.send(err);
 
     res.json(contact);
