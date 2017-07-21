@@ -52,7 +52,14 @@ function update(req, res) {
 }
 
 function remove(req, res) {
-  
+  Contact.findByIdAndRemove(req.params.id, function(err, contact) {
+    if(err) res.send(err);
+
+    res.json({
+      success: true,
+      message: 'Contact has been deleted successfully.'
+    });
+  });
 }
 
 module.exports = contacts;
