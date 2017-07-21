@@ -2,6 +2,7 @@ var Contact = require('../models/contact');
 
 var contacts = {
   list: list,
+  view: view,
   create: create,
   update: update,
   remove: remove
@@ -12,6 +13,14 @@ function list(req, res) {
     if(err) res.send(err);
 
     res.json(contacts);
+  });
+}
+
+function view(req, res) {
+  Contact.findById(req.params.id, function(err, contact) {
+    if(err) res.send(err);
+
+    res.json(contact);
   });
 }
 
