@@ -16,9 +16,19 @@ function list(req, res) {
 }
 
 function create(req, res) {
-  res.json({
-    error: true,
-    message: 'Create not implemented yet.'
+  var contact = new Contact({
+    name: req.body.name,
+    email: req.body.email,
+    mobile: req.body.mobile
+  });
+
+  contact.save(function(err, c) {
+    if(err) throw err;
+
+    res.json({
+      success: true,
+      message: 'New contact created successfully'
+    });
   });
 }
 
