@@ -1,8 +1,21 @@
-var contacts = require('./contacts');
+var auth      = require('./authenticate'),
+  contacts    = require('./contacts'),
+  users       = require('./users'),
+  verifyToken = require('../middleware/verifytoken');
+
 
 function api(express) {
   var apiRouter = express.Router();
-  
+
+  // TOKEN AUTHENTICATION
+  apiRouter.post('/authenticate', auth);
+
+  // USER API
+  apiRouter.post('/users', users.create);
+
+  // VERIFY TOKEN
+  apiRouter.use(verifyToken);
+
   // CONTACT API
   apiRouter.get('/phonebook', contacts.list);
   apiRouter.post('/phonebook', contacts.create);

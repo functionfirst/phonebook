@@ -12,7 +12,6 @@ function verifyToken(req, res, next) {
   // decode token
   // verify secret and check expiry
   jwt.verify(token, superSecret, function(err, decoded) {
-    console.log(err);
     if(err) {
       return accessForbidden(res, 'Failed to authenticate token');
     }

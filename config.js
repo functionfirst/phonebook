@@ -8,5 +8,6 @@ config.db = {
 }
 
 config.secret = 'nelsonwoodworkplazawirewombat';
+config.tokenExpiry = 30;
 
 module.exports = config;
