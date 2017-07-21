@@ -4,18 +4,14 @@ var express = require('express');
   config = require('./config'),
   port = process.env.PORT || config.port || 3000;
 
-var contacts = [{
-  name: 'Alan',
-  email: 'foo@bar.com'
-}];
+var Contact = require('./app/models/contact');
 
 app.get('/phonebook', function(req, res) {
-  var contacts = [{
-    name: 'Alan',
-    email: 'foo@bar.com'
-  }];
+  Contact.find(function(err, contacts) {
+    if(err) res.send(err);
 
-  res.json(contacts);
+    res.json(contacts);
+  });
 });
 
 app.get('*', function(req, res) {
