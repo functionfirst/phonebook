@@ -1,7 +1,7 @@
 var express = require('express');
   app = express(),
   http = require('http'),
-  port = 3000;
+  config = require('./config');
 
 
 app.get('*', function(req, res) {
@@ -11,6 +11,6 @@ app.get('*', function(req, res) {
 });
 
 httpServer = http.createServer(app);
-httpServer.listen(port);
+httpServer.listen(config.port);
 
-console.log('Listening on port ' + port);
+console.log('Listening on port ' + config.port);
