@@ -1,8 +1,8 @@
 var express = require('express');
   app = express(),
   http = require('http'),
-  config = require('./config');
-
+  config = require('./config'),
+  port = process.env.PORT || config.port || 3000;
 
 app.get('*', function(req, res) {
   res.json({
@@ -11,6 +11,4 @@ app.get('*', function(req, res) {
 });
 
 httpServer = http.createServer(app);
-httpServer.listen(config.port);
-
-console.log('Listening on port ' + config.port);
+httpServer.listen(port);
