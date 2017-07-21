@@ -1,18 +1,10 @@
-var Contact = require('../models/contact');
+var contacts = require('./contacts');
 
 function api(express) {
   var apiRouter = express.Router();
-  apiRouter.get('/phonebook', contactList);
+  apiRouter.get('/phonebook', contacts.list);
 
   return apiRouter;
-}
-
-function contactList(req, res) {
-  Contact.find(function(err, contacts) {
-    if(err) res.send(err);
-
-    res.json(contacts);
-  });
 }
 
 module.exports = api;
