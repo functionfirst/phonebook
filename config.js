@@ -7,4 +7,6 @@ config.db = {
   name: 'phonebook'
 }
 
+config.secret = 'nelsonwoodworkplazawirewombat';
+
 module.exports = config;
