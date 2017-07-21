@@ -23,7 +23,7 @@ function create(req, res) {
   });
 
   contact.save(function(err, c) {
-    if(err) throw err;
+    if(err) res.send(err);
 
     res.json({
       success: true,
@@ -33,17 +33,26 @@ function create(req, res) {
 }
 
 function update(req, res) {
-  res.json({
-    error: true,
-    message: 'Update not implemented yet.'
+  Contact.findById(req.params.id, function(err, contact) {
+    if(err) res.send(err);
+
+    if(req.body.name) contact.name = req.body.name;
+    contact.email = req.body.email;
+    contact.mobile = req.body.mobile;
+
+    contact.save(function(err, c){
+      if(err) res.send(err);
+
+      res.json({
+        success: true,
+        message: "Contact has been updated successfully."
+      });
+    });
   });
 }
 
 function remove(req, res) {
-  res.json({
-    error: true,
-    message: 'Delete not implemented yet.'
-  });
+  
 }
 
 module.exports = contacts;

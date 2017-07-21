@@ -1,10 +1,9 @@
 # Phonebook RESTful API
-
 Your task is to build a RESTful API for a phone book application.
 
 Your APIs need to support an authentication method in order to secure your requests.
 
-##Requirements
+## Requirements
 - Mandatory endpoints:
 * create
 * read
