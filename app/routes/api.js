@@ -1,6 +1,7 @@
 var auth      = require('./authenticate'),
   contacts    = require('./contacts'),
   users       = require('./users'),
+  seed        = require('./seed'),
   verifyToken = require('../middleware/verifytoken');
 
 
@@ -12,6 +13,9 @@ function api(express) {
 
   // USER API
   apiRouter.post('/users', users.create);
+
+  // SEED DB
+  apiRouter.get('/seed', seed);
 
   // VERIFY TOKEN
   apiRouter.use(verifyToken);

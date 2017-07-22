@@ -1,17 +1,17 @@
 # Phonebook RESTful API
-Your task is to build a RESTful API for a phone book application.
+Simple API built using NodeJS, Express and MongoDB.
 
-Your APIs need to support an authentication method in order to secure your requests.
+Grab the latest code: `git clone https://github.com/functionfirst/phonebook.git`
 
-## Requirements
-- Mandatory endpoints:
-* create
-* read
-* update
-* delete (feel free to extend these endpoints)
+## Getting started
+* `npm install` - installs module dependencies
+* `npm start` - launch the API.
+* `npm seed` - pre-seed the database with some demo data
+* `npm test` - run mocha/chai tests
 
-- Use an authentication method to secure your requests (Examples: JWT token, oAuth, etc.)
-- use a way to make your data persistent (database is preferred)
-- write at least one unit test and a functional test
+## Build Process
+The app itself is built using ExpressJS which manages routes for the API, some simple middleware for error logging and jsonwebtoken for token-based authentication.
 
-We strongly recommend you use frameworks to solve the challenge if you added frameworks to your hackajob profile. Try to use good practices for the application's architecture. Extra points are given for correct use of design patterns and programming principles.  Please describe in a README.md file how the application works and write any other additional info needed about your endpoints.
+Persistent data storage is provided via MongoDB with Mongoose acting as an ODM.
+
+Tests are undertaken using the Mocha testing framework while Chai is used to describe assertions.
