@@ -1,5 +1,5 @@
 var jwt       = require('jsonwebtoken'),
-  config      = require('../../config'),
+  config      = require('config'),
   Forbidden   = require('../lib/errors').Forbidden,
   superSecret = config.secret;
 

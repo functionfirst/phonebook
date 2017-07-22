@@ -4,7 +4,7 @@ var express     = require('express');
   http          = require('http'),
   errorHandler  = require('./app/middleware/errorHandler'),
   logErrors     = require('./app/middleware/logErrors'),
-  config        = require('./config'),
+  config        = require('config'),
   api           = require('./app/routes/api')(express),
   port          = process.env.PORT || config.port || 3000;
 

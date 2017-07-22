@@ -1,5 +1,5 @@
 var mongoose  = require('mongoose'),
-  config      = require('../../config');
+  config      = require('config');
 
 var uristring = 'mongodb://' + config.db.host + '/' + config.db.name;
 mongoose.Promise = global.Promise;

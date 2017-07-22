@@ -1,6 +1,6 @@
 var User      = require('../models/user'),
   jwt         = require('jsonwebtoken'),
-  config      = require('../../config'),
+  config      = require('config'),
   tokenExpiry = config.tokenExpiry,
   superSecret = config.secret;
 
@@ -15,10 +15,9 @@ function authenticate(req, res) {
     if(!user) {
       return res.json({
         success: false,
-        message: 'Authentication failed.'
+        message: 'Authentication failed'
       })
     }
-    console.log('user exists')
 
     // Check password matches
     var validPassword = user.comparePassword(req.body.password);
