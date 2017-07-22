@@ -55,7 +55,8 @@ function update(req, res) {
 
       res.json({
         success: true,
-        message: "Contact has been updated successfully."
+        contact: contact,
+        message: "Contact has been updated successfully"
       });
     });
   });
@@ -67,7 +68,8 @@ function remove(req, res) {
 
     res.json({
       success: true,
-      message: 'Contact has been deleted successfully.'
+      id: contact.id,
+      message: 'Contact has been deleted successfully'
     });
   });
 }

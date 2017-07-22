@@ -92,10 +92,11 @@ describe('Contacts', function() {
       chai.request(server)
         .post('/phonebook')
         .send(contact)
-        .set('x-access-token' , token)
+        .set('x-access-token', token)
         .end(function(err, res) {
           res.should.have.status(200);
           res.body.should.be.a('object');
+          res.body.should.have.property('success').eql(true);
           res.body.should.have.property('message').eql('New contact created successfully');
           res.body.contact.should.have.property('name');
           res.body.contact.should.have.property('email');
@@ -107,9 +108,141 @@ describe('Contacts', function() {
   });
 
 
-  // Get a single contact
+  describe('/GET/:id phonebook', function() {     
+    it('should not GET a phonebook contact without a token', function(done) {
+      var contact = new Contact({
+        name: 'Alan Jenkins',
+        email: 'alan@functionfirst.co.uk',
+        mobile: '07795 363980'
+      });
 
-  // Update a single contact
+      contact.save(function(err, c) {
+        chai.request(server)
+          .get('/phonebook/' + c._id)
+          .end(function(err, res){
+            res.should.have.status(403);
+            done();
+          });
+      });
+    });
+
+    it('should not GET a phonebook contact', function(done) {
+      var contact = new Contact({
+        name: 'Alan Jenkins',
+        email: 'alan@functionfirst.co.uk',
+        mobile: '07795 363980'
+      });
+
+      contact.save(function(err, c) {
+        chai.request(server)
+          .get('/phonebook/' + c.id)
+          .set('x-access-token', token)
+          .end(function(err, res){
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('name');
+            res.body.should.have.property('email');
+            res.body.should.have.property('mobile');
+            res.body.should.have.property('_id').eql(contact.id);
+            done();
+          });
+      });
+    });
+  });
+
+  describe('/PUT/:id phonebook', function() {
+    it('should not UPDATE a phonebook contact without a token', function(done) {
+      var contact = new Contact({
+        name: 'Alan Jenkins',
+        email: 'alan@functionfirst.co.uk',
+        mobile: '07795 363980'
+      });
+
+      contact.save(function(err, c) {
+        chai.request(server)
+          .put('/phonebook/' + c._id)
+          .send(contact)
+          .end(function(err, res){
+            res.should.have.status(403);
+            done();
+          });
+      });
+    });
+
+    it('should UPDATE a phonebook contact', function(done) {
+      var contact = new Contact({
+        name: 'Alan Jenkins',
+        email: 'alan@functionfirst.co.uk',
+        mobile: '07795 363980'
+      });
+
+      contact.save(function(err, c) {
+        chai.request(server)
+          .put('/phonebook/' + c._id)
+          .send(contact)
+          .set('x-access-token', token)
+          .end(function(err, res){
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('success').eql(true);
+            res.body.should.have.property('message').eql('Contact has been updated successfully');
+            res.body.should.have.property('contact');
+            res.body.contact.should.have.property('name');
+            res.body.contact.should.have.property('email');
+            res.body.contact.should.have.property('mobile');
+            res.body.contact.should.have.property('_id');
+            done();
+          });
+      });
+    });
+  });
+
+  describe('/DELETE/:id phonebook', function() {
+    it('should not DELETE a phonebook contact without a token', function(done) {
+      var contact = new Contact({
+        name: 'Alan Jenkins',
+        email: 'alan@functionfirst.co.uk',
+        mobile: '07795 363980'
+      });
+
+      contact.save(function(err, c) {
+        chai.request(server)
+          .delete('/phonebook/' + c._id)
+          .send(contact)
+          .end(function(err, res){
+            res.should.have.status(403);
+            done();
+          });
+      });
+    });
+
+    it('should DELETE a phonebook contact', function(done) {
+      var contact = new Contact({
+        name: 'Alan Jenkins',
+        email: 'alan@functionfirst.co.uk',
+        mobile: '07795 363980'
+      });
+
+      contact.save(function(err, c) {
+        chai.request(server)
+          .delete('/phonebook/' + c._id)
+          .send(contact)
+          .set('x-access-token', token)
+          .end(function(err, res) {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('success').eql(true);
+            res.body.should.have.property('message').eql('Contact has been deleted successfully');
+            res.body.should.have.property('id').eql(contact.id);
+            done();
+          });
+      });
+    });
+  });
+
+  
+
+
 
   // Delete a single contact
 });
