@@ -1,5 +1,5 @@
 var mongoose  = require('mongoose'),
-  db          = require('../middleware/db'),
+  db          = require('../lib/db'),
   bcrypt      = require('bcrypt-nodejs');
 
 var UserSchema = new mongoose.Schema({

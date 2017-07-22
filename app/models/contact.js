@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var db = require('../middleware/db');
+var db = require('../lib/db');
 
 var ContactSchema = new mongoose.Schema({
   name: {

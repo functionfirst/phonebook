@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Phonebook API</title>
+    
+    <style type="text/css">
+      body {
+        margin: 0;
+        font: 13px/1.6em Arial, Helvetica, sans-serif;
+      }
+
+      .container {
+        width: 800px;
+        margin: 0 auto;
+        max-width: 100%;
+      }
+
+      .content {
+        margin: 40px 20px;
+        background-color: #fff;
+      }
+
+      pre {
+        border: 1px solid #ddd;
+        padding: 10px;
+        background-color: #fafafa;
+        border-radius: 3px;
+      }
+
+      pre span {
+        float: right;
+        color: #900;
+      }
+
+      footer {
+        margin: 20px;
+        text-align: center;
+      }
+      a,
+      a:hover {
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+      <h1>Phonebook API</h1>
+
+      <p>A simple RESTful API for managing a phonebook of contacts.</p>
+
+<h2>Authentication</h2>
+
+<p>
+  Almost all API requests will require token to authenticate the request. The first step of this is to obtain
+  an authorisation token below. Once you have this token simply pass this along with your API call either in
+  the body[token], param[token] or header [x-access-token] of the request.
+</p>
+
+<h2>Obtain an authorisation token.</h2>
+
+<pre>
+POST /authenticate
+
+{ "username", "", "password": ""}
+</pre>
+
+<pre>
+{
+  "success": "true",
+  "message": "Your token has been created"
+  "token": "this_is_your_unique_token"
+}
+</pre>
+
+<h2>Create a new user account</h2>
+<p>User accounts are used to authenticate requests to the API.</p>
+
+<p><em>Note: The current implementation is very simple, you cannot edit users or recover passwords.</em></p>
+
+<pre>
+POST /users
+
+{ "username", "", "password": ""}
+</pre>
+
+<pre>
+{
+  "success": "true",
+  "message": "New account created successfully"
+}
+</pre>
+
+<h2>Get a list of contacts</h2>
+<p>Returns a list of ALL contacts in the database, the phonebook is shared between all Users.</p>
+
+<pre>GET /phonebook <span>[token required]</span></pre>
+
+<pre>
+[
+  {
+    "_id": "59724704b7ef846b66a6a307",
+    "name": "Alexander Bell",
+    "email": "alex.bell.test@gmail.com",
+    "mobile": "0873 234 234"
+  },
+  {
+    "_id": "597247a2ec16826b888340f1",
+    "name": "Bill Mayer",
+    "email": "gary.test.burgess@gmail.com"
+  }
+]
+</pre>
+
+<h2>Create a Contact</h2>
+<p>The `name` field is required<p>
+
+<pre>
+POST /phonebook <span>[token required]</span>
+
+{ "name", "", "email": "", "mobile" : ""}
+</pre>
+
+<pre>
+{
+  "success": "true",
+  "contact": {
+    "_id": "59724704b7ef846b66a6a307",
+    "name": "Alexander Bell",
+    "email": "alex.bell.test@gmail.com",
+    "mobile": "0873 234 234"
+  },
+  "message": "New contact created successfully"
+}
+</pre>
+
+<h2>View a contact</h2>
+
+<pre>GET /phonebook/:id <span>[token required]</span></pre>
+<pre>
+{
+  "_id": "59724704b7ef846b66a6a307",
+  "name": "Alexander Bell",
+  "email": "alex.bell.test@gmail.com",
+  "mobile": "0873 234 234"
+}
+</pre>
+
+<h2>Update a contact</h2>
+
+<p>If the provided `name` field is blank, the current field value will be kept.</p>
+
+<pre>
+PUT /phonebook/:id <span>[token required]</span>
+
+{ "name", "", "email": "", "mobile" : ""}
+</pre>
+
+<pre>
+{
+  "success": "true",
+  "contact": {
+    "_id": "59724704b7ef846b66a6a307",
+    "name": "Alexander Bell",
+    "email": "alex.bell.test@gmail.com",
+    "mobile": "0873 234 234"
+  },
+  "message": "Contact has been updated successfully"
+}
+</pre>
+
+<h2>Delete a contact</h2>
+
+<pre>DELETE /phonebook/:id <span>[token required]</span></pre>
+<pre>
+{
+  "success": "true",
+  "id": "59724704b7ef846b66a6a307",
+  "message": "Contact has been deleted successfully"
+}
+</pre>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>Github: <a href="https://github.com/functionfirst/phonebook.git" target="_blank">github.com/functionfirst/phonebook.git</a></p>
+
+        <p>Created by Alan Jenkins. <a href="http://functionfirst.co.uk" target="_blank">functionfirst.co.uk</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

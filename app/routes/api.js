@@ -4,7 +4,6 @@ var auth      = require('./authenticate'),
   seed        = require('./seed'),
   verifyToken = require('../middleware/verifytoken');
 
-
 function api(express) {
   var apiRouter = express.Router();
 

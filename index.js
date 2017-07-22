@@ -3,6 +3,7 @@ var express     = require('express');
   bodyParser    = require('body-parser')
   errorHandler  = require('./app/middleware/errorHandler'),
   logErrors     = require('./app/middleware/logErrors'),
+  path          = require('path'),
   config        = require('config'),
   api           = require('./app/routes/api')(express),
   port          = process.env.PORT || config.port || 3000;
@@ -13,15 +14,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
+// Homepage
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname + '/app/views/index.html'));
+});
+
 // Implement API
 app.use(api);
-
-// Fall-back for all other requests
-app.get('*', function(req, res) {
-  res.json({
-    message: 'Welcome to the Phonebook API'
-  });
-});
 
 app.use(logErrors);
 app.use(errorHandler);
