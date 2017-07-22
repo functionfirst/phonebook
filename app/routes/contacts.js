@@ -10,7 +10,7 @@ var contacts = {
 
 function list(req, res) {
   Contact.find({},  'name email mobile', function(err, contacts) {
-    if(err) res.send(err);
+    if(err) return res.send(err);
 
     res.json(contacts);
   });
@@ -18,7 +18,7 @@ function list(req, res) {
 
 function view(req, res) {
   Contact.findById(req.params.id, 'name email mobile', function(err, contact) {
-    if(err) res.send(err);
+    if(err) return res.send(err);
 
     res.json(contact);
   });
@@ -32,10 +32,11 @@ function create(req, res) {
   });
 
   contact.save(function(err, c) {
-    if(err) res.send(err);
+    if(err) return res.send(err);
 
     res.json({
       success: true,
+      contact: contact,
       message: 'New contact created successfully'
     });
   });
@@ -43,14 +44,14 @@ function create(req, res) {
 
 function update(req, res) {
   Contact.findById(req.params.id, function(err, contact) {
-    if(err) res.send(err);
+    if(err) return res.send(err);
 
     if(req.body.name) contact.name = req.body.name;
     contact.email = req.body.email;
     contact.mobile = req.body.mobile;
 
     contact.save(function(err, c){
-      if(err) res.send(err);
+      if(err) return res.send(err);
 
       res.json({
         success: true,
@@ -62,7 +63,7 @@ function update(req, res) {
 
 function remove(req, res) {
   Contact.findByIdAndRemove(req.params.id, function(err, contact) {
-    if(err) res.send(err);
+    if(err) return res.send(err);
 
     res.json({
       success: true,
