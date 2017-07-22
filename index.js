@@ -1,7 +1,6 @@
 var express     = require('express');
   app           = express(),
   bodyParser    = require('body-parser')
-  http          = require('http'),
   errorHandler  = require('./app/middleware/errorHandler'),
   logErrors     = require('./app/middleware/logErrors'),
   config        = require('config'),
@@ -27,5 +26,7 @@ app.get('*', function(req, res) {
 app.use(logErrors);
 app.use(errorHandler);
 
-httpServer = http.createServer(app);
-httpServer.listen(port);
+app.listen(port);
+console.log("Listening on port " + port);
+
+module.exports = app;
