@@ -15,7 +15,7 @@
     "config": "^1.26.1",
     "express": "^4.15.3",
     "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.11.3"
+    "mongoose": "^5.8.4"
   },
   "devDependencies": {
     "chai": "^4.1.0",
